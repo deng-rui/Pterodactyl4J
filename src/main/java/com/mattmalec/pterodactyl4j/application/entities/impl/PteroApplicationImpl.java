@@ -53,6 +53,13 @@ public class PteroApplicationImpl implements PteroApplication {
 				(response, request) -> new ApplicationUserImpl(response.getObject(), this));
 	}
 
+	public PteroAction<ApplicationUser> retrieveUserByExternalId(String id) {
+		return PteroActionImpl.onRequestExecute(
+				api,
+				Route.Users.GET_USER_EXTERNAL.compile(id),
+				(response, request) -> new ApplicationUserImpl(response.getObject(), this));
+	}
+
 	@Override
 	public PaginationAction<ApplicationUser> retrieveUsers() {
 		return PaginationResponseImpl.onPagination(
@@ -274,6 +281,15 @@ public class PteroApplicationImpl implements PteroApplication {
 	public PaginationAction<ApplicationServer> retrieveServers() {
 		return PaginationResponseImpl.onPagination(
 				api, Route.Servers.LIST_SERVERS.compile(), (object) -> new ApplicationServerImpl(this, object));
+	}
+
+	@Override
+	public PteroAction<ApplicationServer> retrieveServerByExternalId(String id) {
+		return PteroActionImpl.onRequestExecute(
+				api,
+				Route.Servers.GET_SERVER_EXTERNAL.compile(id),
+				(response, request) -> new ApplicationServerImpl(this, response.getObject())
+		);
 	}
 
 	@Override

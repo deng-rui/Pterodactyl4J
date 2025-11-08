@@ -77,6 +77,23 @@ public interface PteroApplication {
 	}
 
 	/**
+	 * Retrieves an individual ApplicationUser represented by the provided External ID from Pterodactyl instance
+	 * <br>This requires an <b>Application API key</b> with the <b>Users</b> permission with <b>Read</b> access.
+	 *
+	 * @param  id
+	 *         The user's external ID
+	 *
+	 * @throws com.mattmalec.pterodactyl4j.exceptions.LoginException
+	 *         If the API key is incorrect or doesn't have the required permissions
+	 *
+	 * @throws com.mattmalec.pterodactyl4j.exceptions.NotFoundException
+	 *         If the user cannot be found
+	 *
+	 * @return {@link com.mattmalec.pterodactyl4j.PteroAction PteroAction} - Type {@link com.mattmalec.pterodactyl4j.application.entities.ApplicationUser ApplicationUser}
+	 */
+	PteroAction<ApplicationUser> retrieveUserByExternalId(String id);
+	
+	/**
 	 * Retrieves ApplicationUsers matching the provided username from Pterodactyl instance
 	 * <br>This requires an <b>Application API key</b> with the <b>Users</b> permission with <b>Read</b> access.
 	 *
@@ -537,6 +554,23 @@ public interface PteroApplication {
 	default PteroAction<ApplicationServer> retrieveServerById(long id) {
 		return retrieveServerById(Long.toUnsignedString(id));
 	}
+
+	/**
+	 * Retrieves an individual ApplicationServer represented by the provided External ID from Pterodactyl instance
+	 * <br>This requires an <b>Application API key</b> with the <b>Servers</b> permission with <b>Read</b> access.
+	 *
+	 * @param  id
+	 *         The server's external ID
+	 *
+	 * @throws com.mattmalec.pterodactyl4j.exceptions.LoginException
+	 *         If the API key is incorrect or doesn't have the required permissions
+	 *
+	 * @throws com.mattmalec.pterodactyl4j.exceptions.NotFoundException
+	 *         If the server cannot be found
+	 *
+	 * @return {@link com.mattmalec.pterodactyl4j.PteroAction PteroAction} - Type {@link com.mattmalec.pterodactyl4j.application.entities.ApplicationServer ApplicationServer}
+	 */
+	PteroAction<ApplicationServer> retrieveServerByExternalId(String id);
 
 	/**
 	 * Retrieves ApplicationServers matching the provided name from Pterodactyl instance
